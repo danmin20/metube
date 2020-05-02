@@ -5,6 +5,7 @@ import axios from "axios";
 import { USER_SERVER } from "../../../Config";
 import { withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { logoutUser } from "../../../../_actions/user_actions";
 
 function RightMenu(props) {
   const user = useSelector((state) => state.user);
@@ -13,6 +14,7 @@ function RightMenu(props) {
     axios.get(`${USER_SERVER}/logout`).then((response) => {
       if (response.status === 200) {
         props.history.push("/login");
+        logoutUser();
       } else {
         alert("Log Out Failed");
       }
