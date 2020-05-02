@@ -17,7 +17,7 @@ const Category = [
   { value: 3, label: "Pets & Animals" },
 ];
 
-function VideoUploadPage() {
+function VideoUploadPage(props) {
   const user = useSelector((state) => state.user);
 
   const [title, setTitle] = useState("");
@@ -81,7 +81,8 @@ function VideoUploadPage() {
     };
     Axios.post("/api/video/uploadVideo", variables).then((response) => {
       if (response.data.success) {
-        console.log(response.data);
+        message.success("업로드 성공");
+        props.history.push("/");
       } else {
         alert("비디오 업도르에 실패했습니다");
       }
