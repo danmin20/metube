@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, List, Avatar } from "antd";
 import Axios from "axios";
+import SideVideo from "./SideVideo";
 
 function VideoDetailPage(props) {
   const videoId = props.match.params.videoId;
@@ -18,8 +19,9 @@ function VideoDetailPage(props) {
   }, []);
 
   if (video.writer) {
-      console.log(video)
+    console.log(video);
     return (
+    //   디테일 부분
       <Row gutter={[16, 16]}>
         <Col lg={18} xs={24}>
           <div style={{ width: "100%", padding: "3rem 4rem" }}>
@@ -37,8 +39,9 @@ function VideoDetailPage(props) {
             </List.Item>
           </div>
         </Col>
+        {/* 사이드 부분 */}
         <Col lg={6} xs={24}>
-          Side
+          <SideVideo />
         </Col>
       </Row>
     );
