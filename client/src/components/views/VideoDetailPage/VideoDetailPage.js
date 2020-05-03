@@ -31,7 +31,14 @@ function VideoDetailPage(props) {
               src={`http://localhost:5000/${video.filePath}`}
               controls
             />
-            <List.Item actions={[<Subscribe userTo={video.writer._id} />]}>
+            <List.Item
+              actions={[
+                <Subscribe
+                  userTo={video.writer._id}
+                  userFrom={localStorage.getItem("userId")}
+                />,
+              ]}
+            >
               <List.Item.Meta
                 avatar={<Avatar src={video.writer.image} />}
                 title={video.writer.name}
