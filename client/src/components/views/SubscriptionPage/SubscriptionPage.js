@@ -5,15 +5,17 @@ import Axios from "axios";
 const { Title } = Typography;
 const { Meta } = Card;
 
-function LandingPage() {
+function SubscriptionPage() {
   const [video, setVideo] = useState([]);
+  let variable = { userFrom: localStorage.getItem("userId") };
 
   useEffect(() => {
-    Axios.get("/api/video/getvideos").then((response) => {
+    Axios.post("/api/video/getSuscriptionVideos", variable).then((response) => {
       if (response.data.success) {
+        console.log(response.data);
         setVideo(response.data.videos);
       } else {
-        alert("비디오 불러오기를 실패했습니다");
+        alert("구독 비디오 불러오기를 실패했습니다");
       }
     });
   }, []);
@@ -54,11 +56,11 @@ function LandingPage() {
 
   return (
     <div style={{ width: "85%", margin: "3rem auto" }}>
-      <Title level={2}>Recommended</Title>
+      <Title level={2}>Subscribed</Title>
       <hr />
       <Row gutter={[32, 16]}>{renderCards}</Row>
     </div>
   );
 }
 
-export default LandingPage;
+export default SubscriptionPage;
