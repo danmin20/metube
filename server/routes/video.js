@@ -83,12 +83,21 @@ router.post("/uploadVideo", (req, res) => {
 });
 
 router.get("/getVideos", (req, res) => {
-  // populate을 사용해야 모든 정보를 가져올 수 있음
   Video.find()
+    // populate을 사용하여 writer의 정보를 가져옴
     .populate("writer")
     .exec((err, videos) => {
       if (err) return res.status(400).send(err);
       res.status(200).json({ success: true, videos });
+    });
+});
+
+router.post("/getVideoDetail", (req, res) => {
+  Video.findOne({ _id: req.body.videoId })
+    .populate("writer")
+    .exec((err, videoDetail) => {
+      if (err) return res.status(400).send(err);
+      res.status(200).json({ success: true, videoDetail });
     });
 });
 

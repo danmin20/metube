@@ -25,8 +25,8 @@ function LandingPage() {
 
     return (
       <Col key={index} lg={6} md={8} xs={24}>
-        <a href={`/video/post/${video._id}`}>
-          <div style={{ position: "relative" }}>
+        <div style={{ position: "relative" }}>
+          <a href={`/video/${video._id}`}>
             <img
               style={{ width: "100%" }}
               src={`http://localhost:5000/${video.thumbnail}`}
@@ -37,13 +37,13 @@ function LandingPage() {
                 {minutes} : {secondes}
               </span>
             </div>
-          </div>
-        </a>
+          </a>
+        </div>
         <br />
         <Meta
           avatar={<Avatar src={video.writer.image} />}
           title={video.title}
-          description=""
+          description={video.description}
         />
         <span>{video.writer.name}</span>
         <br />
