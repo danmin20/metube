@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Row, Col, List, Avatar } from "antd";
 import Axios from "axios";
 import SideVideo from "./SideVideo";
+import Subscribe from "./Subscribe";
 
 function VideoDetailPage(props) {
   const videoId = props.match.params.videoId;
@@ -21,7 +22,7 @@ function VideoDetailPage(props) {
   if (video.writer) {
     console.log(video);
     return (
-    //   디테일 부분
+      //   디테일 부분
       <Row gutter={[16, 16]}>
         <Col lg={18} xs={24}>
           <div style={{ width: "100%", padding: "3rem 4rem" }}>
@@ -30,7 +31,7 @@ function VideoDetailPage(props) {
               src={`http://localhost:5000/${video.filePath}`}
               controls
             />
-            <List.Item actions>
+            <List.Item actions={[<Subscribe userTo={video.writer._id} />]}>
               <List.Item.Meta
                 avatar={<Avatar src={video.writer.image} />}
                 title={video.writer.name}
