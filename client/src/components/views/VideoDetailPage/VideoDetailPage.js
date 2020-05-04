@@ -20,7 +20,13 @@ function VideoDetailPage(props) {
   }, []);
 
   if (video.writer) {
-    console.log(video);
+    const showbtn = video.writer._id !== localStorage.getItem("userId") && (
+      <Subscribe
+        userTo={video.writer._id}
+        userFrom={localStorage.getItem("userId")}
+      />
+    );
+
     return (
       //   디테일 부분
       <Row gutter={[16, 16]}>
@@ -31,14 +37,7 @@ function VideoDetailPage(props) {
               src={`http://localhost:5000/${video.filePath}`}
               controls
             />
-            <List.Item
-              actions={[
-                <Subscribe
-                  userTo={video.writer._id}
-                  userFrom={localStorage.getItem("userId")}
-                />,
-              ]}
-            >
+            <List.Item actions={[showbtn]}>
               <List.Item.Meta
                 avatar={<Avatar src={video.writer.image} />}
                 title={video.writer.name}
