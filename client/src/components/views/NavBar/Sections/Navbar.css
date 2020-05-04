@@ -9,18 +9,20 @@
 }
 
 .menu__logo {
-  width: 150px;
+  width: 200px;
   float: left;
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-size: 30px;
 }
 
 .menu__logo a {
+  color: black;
   display: inline-block;
-  font-size: 20px;
   padding: 19px 20px;
 }
 
 .menu__container .ant-menu-item {
-  padding: 0px 5px;
+  padding: 10px 5px;
 }
 
 .menu__container .ant-menu-submenu-title {
