@@ -16,11 +16,13 @@ function SingleComment(props) {
       content: comment,
       writer: user.userData._id,
       videoId: props.videoId,
-      responstTo: props.comment._id,
+      responseTo: props.comment._id,
     };
 
     Axios.post("/api/comment/saveComment", variable).then((response) => {
       if (response.data.success) {
+        setComment("");
+        setOpenReply(false)
         props.refresh(response.data.result);
       } else {
         alert("댓글 작성 실패");
@@ -36,7 +38,6 @@ function SingleComment(props) {
       Reply to
     </span>,
   ];
-  console.log(props.comment);
 
   return (
     <div>

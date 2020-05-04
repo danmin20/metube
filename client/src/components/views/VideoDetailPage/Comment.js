@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Axios from "axios";
 import { useSelector } from "react-redux";
 import SingleComment from "./SingleComment";
+import ReplyComment from "./ReplyComment";
 
 function Comment(props) {
   const user = useSelector((state) => state.user);
@@ -18,13 +19,13 @@ function Comment(props) {
     };
     Axios.post("/api/comment/saveComment", variable).then((response) => {
       if (response.data.success) {
+        setComment("");
         props.refresh(response.data.result);
       } else {
         alert("댓글 작성 실패");
       }
     });
   };
-  console.log(props.commentList);
 
   return (
     <div>
@@ -36,12 +37,19 @@ function Comment(props) {
         props.commentList.map(
           (comment, index) =>
             !comment.responseTo && (
-              <SingleComment
-                key={index}
-                comment={comment}
-                videoId={props.videoId}
-                refresh={props.refresh}
-              />
+              <div key={index}>
+                <SingleComment
+                  comment={comment}
+                  videoId={props.videoId}
+                  refresh={props.refresh}
+                />
+                <ReplyComment
+                  parentCommentId={comment._id}
+                  commentList={props.commentList}
+                  videoId={props.videoId}
+                  refresh={props.refresh}
+                />
+              </div>
             )
         )}
       {/* Root comment form */}
